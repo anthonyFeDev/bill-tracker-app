@@ -1,28 +1,43 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <AddCategory v-if="shouldShowAddCategory" v-on:category="addCategory" />
+    <div v-else>
+      <NavBar />
+      <div class="wrapper">
+        <div class="bills">
+          <BillsTable />
+        </div>
+        <div class="chart">
+          <Chart :bills="activeBills" />
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AddCategory from './components/AddCategory'
+import AddBill from './components/AddBill'
+import NavBar from './components/NavBar'
+import BillsTable from './components/BillsTable'
+import Chart from './components/Chart'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AddBill,
+    AddCategory,
+    NavBar,
+    BillsTable,
+    Chart
+  },
+  data() {
+    return {
+      bills: [],
+      catergories: []
+    }
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
